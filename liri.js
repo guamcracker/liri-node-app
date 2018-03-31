@@ -7,11 +7,14 @@ var request = require('request');
 
 // condensing the arguments syntax
 var arg = process.argv;
-
+// console.log(process.argv[3])
 // importing the file reading/writing functionality
 var fs = require("fs");
 
 ////////////////////////////////////////////////
+//require in packages before using them
+var Spotify = require('node-spotify-api');
+var Twitter = require('twitter');
 
 var spotify = new Spotify(keys.spotify);
 var client = new Twitter(keys.twitter);
@@ -81,7 +84,8 @@ var liri = {
 	tweets() {
 		console.log("============================================");
 		console.log("Below are the last 20 Tweets on this account");
-		console.log("============================================");
+        console.log("============================================");
+        var params = {screen_name: 'baddadjokes'};
 		client.get('statuses/user_timeline', params, function(error, tweets, response) {
 			if (!error) {
 				for (var i = 0; i < tweets.length; i++) {
